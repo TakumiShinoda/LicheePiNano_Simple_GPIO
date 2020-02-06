@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"strconv"
 
 	"./mesgs"
 	"./proc"
@@ -24,7 +25,12 @@ func main() {
 
 	switch argComm {
 	case "pins":
-		fmt.Println("Command 'pins' not support now.")
+		var text string = "Support pins on LicheePi nano.\n\nLicheePi nano Pin > SOC Pin\n---------------------------\n"
+
+		for licheePin, socPin := range props.LicheePins {
+			text += "" + licheePin + " > " + strconv.Itoa(socPin) + "\n"
+		}
+		fmt.Println(text)
 	default:
 		var notPinSupport error = utils.CheckPinSupport(argPin)
 
