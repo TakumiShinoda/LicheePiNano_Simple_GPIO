@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"fmt"
 
 	"./mesgs"
 	"./proc"
@@ -21,14 +22,16 @@ func main() {
 		utils.PrintExit(mesgs.CreateErrInvalidCommand(props.Commands))
 	}
 
-	var notPinSupport error = utils.CheckPinSupport(argPin)
-	if notPinSupport != nil {
-		utils.PrintExit(notPinSupport.Error())
-	}
-
 	switch argComm {
 	case "pins":
+		fmt.Println("Command 'pins' not support now.")
 	default:
+		var notPinSupport error = utils.CheckPinSupport(argPin)
+
+		if notPinSupport != nil {
+			utils.PrintExit(notPinSupport.Error())
+		}
+
 		if argValue != "0" && argValue != "1" {
 			utils.PrintExit(mesgs.CreateErrInvalidValue())
 		} else if argValue == "0" {
